@@ -1,52 +1,66 @@
+import React from 'react';
+import { useState } from 'react';
 import './App.css';
-import todo from "./data.json";
+import Form from './Form';
+import ListItem from './ListItem';
+//import todo from "./data.json";
 
-const FormatDate = function (date) {
-  let d = new Date(date);
-  let month = "" + (d.getMonth() + 1);
-  let day = "" + d.getDate();
-  let year = d.getFullYear();
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2)  day = "0" + day;
-  return [year, month, day].join("-");
-}
-
-function Header() {
+const Header = () => {
   return (
     <header>
-      <h1>React To-Do-List</h1>
+    <h1>React To-Do-List</h1>
     </header>
   );
 }
 
-function Item({ item }) {
-  const itemClass = isOverdue(item) ? "overdue" : "";
-  return (
-    <li key={item.id} className={itemClass}>
-      <span className="content">{item.name}</span>
-      <span className="datedue">By: {FormatDate(new Date(item.timestampDue))}</span>
-      <span className="remove">X</span>
-    </li>
-  );
-}
+const App = () => {
 
-function isOverdue(item) {
-  return !item.complete && item.timestampDue < new Date().getTime();
-}
+  const [todo, setTodo] = useState({name:""});
+  const [todoList, setTodoList] = useState([]);
 
-function App() {
+  const completeItem = (id) => {
+    const updatedTodoList = todoList.map(
+      item => (item.id === id ? { ...item, complete: true } : item)
+    );
+    setTodoList(updatedTodoList);
+  }
+
+  // this does not work yet
+  const removeItem = (id) => {
+    const updatedTodoList = todoList.map(
+      item => (item.id !== id ? item : false)
+    );
+    setTodoList(updatedTodoList);
+  }
+
   return (
     <>
       <Header />
       <div id="container">
         <div className="todolist">
+          <header>
+            <Form 
+              todo={todo} 
+              setTodo={setTodo} 
+              todoList={todoList} 
+              setTodoList={setTodoList}
+            />
+          </header>
           <ul>
-            {todo.Items.map(item => <Item key={item.id} item={item} />)}
+            {todoList.map((item) => (
+              <ListItem 
+                key={item.id} 
+                item={item} 
+                completeItem={ () => completeItem(item.id) }
+                removeItem={ () => removeItem(item.id) } 
+              />
+            ))}
           </ul>
         </div>
       </div>
     </>
   );
+
 }
 
 export default App;
