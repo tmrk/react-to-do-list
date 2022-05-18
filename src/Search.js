@@ -5,14 +5,14 @@ const Search = ({todo, setTodo, todoList, setTodoList}) => {
     const updatedTodoList = todoList.map(
       item => ({ ...item, hidden: !item.name.toLowerCase().includes(searchTerm.toLowerCase()) })
     );
-    setTodoList(updatedTodoList);
+    setTodoList(updatedTodoList); // this doesn't need to be committed to localStorage
   }
 
   return (
     <div className="search">
       <input id="search" 
         placeholder="Search..." onChange={handleChange} 
-        autocomplete="off" spellcheck="false" 
+        autoComplete="off" spellCheck="false" 
       />
       <div>Hooray, nothing to do!</div>
     </div>

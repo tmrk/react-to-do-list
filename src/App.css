@@ -230,3 +230,11 @@ input:focus {
 .todolist > header > form > button:hover {
     background-color: rgb(100, 230, 70);
 }
+
+footer {
+    padding: 20px 0;
+    text-align: center;
+    color: #ccc;
+    font-size: 10px;
+    letter-spacing: 2px;
+}

@@ -9,21 +9,34 @@ import data from './data.json';
 const Header = () => {
   return (
     <header>
-    <h1>React To-Do-List</h1>
+      <h1>React To-Do-List</h1>
     </header>
+  );
+}
+
+const Footer = () => {
+  return (
+    <footer>
+      <p>May 2022</p>
+    </footer>
   );
 }
 
 const App = () => {
 
   const [todo, setTodo] = useState({name:""});
-  const [todoList, setTodoList] = useState(data.Items);
+  const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem("data")) || data.Items);
+
+  const commitChange = (data) => {
+    localStorage.setItem("data", JSON.stringify(data));
+    setTodoList(data);
+  }
 
   const completeItem = (id) => {
     const updatedTodoList = todoList.map(
       item => (item.id === id ? { ...item, complete: true } : item)
     );
-    setTodoList(updatedTodoList);
+    commitChange(updatedTodoList);
   }
 
   const removeItem = (id) => {
@@ -32,7 +45,7 @@ const App = () => {
       const todo = todoList[i];
       if (todo.id !== id) updatedTodoList.push(todo);
     }
-    setTodoList(updatedTodoList);
+    commitChange(updatedTodoList);
   }
 
   let listClassName = "todolist" + (todoList.length ? "" : " empty");
@@ -47,7 +60,7 @@ const App = () => {
               todo={todo} 
               setTodo={setTodo} 
               todoList={todoList} 
-              setTodoList={setTodoList}
+              commitChange={commitChange}
             />
             <Search 
               todo={todo} 
@@ -68,6 +81,7 @@ const App = () => {
           </ul>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

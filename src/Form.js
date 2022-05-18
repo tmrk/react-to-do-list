@@ -1,6 +1,6 @@
 import FormatDate from './FormatDate';
 
-const Form = ({todo, setTodo, todoList, setTodoList}) => {
+const Form = ({todo, setTodo, todoList, commitChange}) => {
 
   const handleChange = (event) => {
     let newItem;
@@ -29,7 +29,7 @@ const Form = ({todo, setTodo, todoList, setTodoList}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (todo.name && todo.name.trim().length) {
-      setTodoList([...todoList, todo]);
+      commitChange([...todoList, todo]);
       setTodo({name:""});
     } else document.getElementById("taskname").focus(); // this is not React but it will do for now
   }
@@ -38,7 +38,7 @@ const Form = ({todo, setTodo, todoList, setTodoList}) => {
     <form onSubmit={handleSubmit}>
     <input id="taskname" value={todo.name} onChange={handleChange} 
       type="text" placeholder="My new task..." 
-      autocomplete="off" spellcheck="false" 
+      autoComplete="off" spellCheck="false" 
     />
     <div className="duedate">
       <label htmlFor="dateDue">Deadline (optional)</label>
