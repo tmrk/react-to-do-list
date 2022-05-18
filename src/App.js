@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './App.css';
 import Form from './Form';
 import ListItem from './ListItem';
-//import todo from "./data.json";
+import todoListData from "./data.json";
 
 const Header = () => {
   return (
@@ -16,7 +16,7 @@ const Header = () => {
 const App = () => {
 
   const [todo, setTodo] = useState({name:""});
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(todoListData.Items);
 
   const completeItem = (id) => {
     const updatedTodoList = todoList.map(
