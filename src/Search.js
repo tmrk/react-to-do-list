@@ -10,7 +10,10 @@ const Search = ({todo, setTodo, todoList, setTodoList}) => {
 
   return (
     <div className="search">
-      <input id="search" placeholder="Search..." onChange={handleChange} />
+      <input id="search" 
+        placeholder="Search..." onChange={handleChange} 
+        autocomplete="off" spellcheck="false" 
+      />
       <div>Hooray, nothing to do!</div>
     </div>
   );

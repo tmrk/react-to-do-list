@@ -36,7 +36,10 @@ const Form = ({todo, setTodo, todoList, setTodoList}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-    <input id="taskname" value={todo.name} onChange={handleChange} type="text" placeholder="My new task..." />
+    <input id="taskname" value={todo.name} onChange={handleChange} 
+      type="text" placeholder="My new task..." 
+      autocomplete="off" spellcheck="false" 
+    />
     <div className="duedate">
       <label htmlFor="dateDue">Deadline (optional)</label>
       <input id="duedate" type="date" 

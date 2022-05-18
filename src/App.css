@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;900&display=swap');
 
 @media only screen and (max-width: 600px) {
     .todolist {
@@ -221,12 +221,12 @@ input:focus {
     border-radius: 3px;
     cursor: pointer;
     font-family: 'Titillium Web', sans-serif;
-    font-weight: bold;
+    font-weight: 900;
     font-size: 20px;
     text-transform: uppercase;
     letter-spacing: 4px;
 }
 
 .todolist > header > form > button:hover {
-    background-color: rgb(172, 243, 157);
+    background-color: rgb(100, 230, 70);
 }
