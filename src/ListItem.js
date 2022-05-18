@@ -11,6 +11,7 @@ export default function ListItem({item, completeItem, removeItem}) {
 
   if (isOverdue(item)) itemClass += "overdue ";
   if (item.complete) itemClass += "completed ";
+  if (item.hidden) itemClass += "hidden ";
 
   return (
     <li key={item.id} className={itemClass}>

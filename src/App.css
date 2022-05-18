@@ -6,6 +6,10 @@
     }
 }
 
+.hidden {
+    display: none!important;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -20,6 +24,7 @@ body {
     height: 100%;
     background: linear-gradient(45deg, rgba(150, 143, 255, 0.2), rgba(200, 139, 5, 0.2));
     font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
 }
 
 input {
@@ -60,7 +65,7 @@ input:focus {
 }
 
 .todolist > header > form {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .todolist.empty > header > .search > input {
@@ -144,26 +149,23 @@ input:focus {
     color: rgba(255,0,0,0.5);
 }
 
+.todolist > ul > li.completed {
+    background: rgba(255,255,255,0.4);
+}
+
 .todolist > ul > li > .complete,
 .todolist > ul > li > .remove {
     width: 30px;
     height: 30px;
     border-radius: 15px;
     font-weight: bold;
+    line-height: 30px;
     background: #ddd;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-}
-
-.todolist > ul > li > .complete {
-    right: 10px;
-}
-
-.todolist > ul > li > .remove {
-    right: 45px;
 }
 
 .todolist > ul > li > .complete:hover {

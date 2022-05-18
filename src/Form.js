@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import FormatDate from './FormatDate';
 
 const Form = ({todo, setTodo, todoList, setTodoList}) => {

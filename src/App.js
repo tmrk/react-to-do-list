@@ -2,8 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import './App.css';
 import Form from './Form';
+import Search from './Search';
 import ListItem from './ListItem';
-import todoListData from "./data.json";
+import data from './data.json';
 
 const Header = () => {
   return (
@@ -16,7 +17,7 @@ const Header = () => {
 const App = () => {
 
   const [todo, setTodo] = useState({name:""});
-  const [todoList, setTodoList] = useState(todoListData.Items);
+  const [todoList, setTodoList] = useState(data.Items);
 
   const completeItem = (id) => {
     const updatedTodoList = todoList.map(
@@ -25,7 +26,6 @@ const App = () => {
     setTodoList(updatedTodoList);
   }
 
-  // this does not work yet
   const removeItem = (id) => {
     let updatedTodoList = [];
     for (let i = 0; i < todoList.length; i++) {
@@ -35,13 +35,21 @@ const App = () => {
     setTodoList(updatedTodoList);
   }
 
+  let listClassName = "todolist" + (todoList.length ? "" : " empty");
+
   return (
     <>
       <Header />
       <div id="container">
-        <div className="todolist">
+        <div className={listClassName}>
           <header>
             <Form 
+              todo={todo} 
+              setTodo={setTodo} 
+              todoList={todoList} 
+              setTodoList={setTodoList}
+            />
+            <Search 
               todo={todo} 
               setTodo={setTodo} 
               todoList={todoList} 
