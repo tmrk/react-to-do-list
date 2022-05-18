@@ -27,9 +27,11 @@ const App = () => {
 
   // this does not work yet
   const removeItem = (id) => {
-    const updatedTodoList = todoList.map(
-      item => (item.id !== id ? item : false)
-    );
+    let updatedTodoList = [];
+    for (let i = 0; i < todoList.length; i++) {
+      const todo = todoList[i];
+      if (todo.id !== id) updatedTodoList.push(todo);
+    }
     setTodoList(updatedTodoList);
   }
 

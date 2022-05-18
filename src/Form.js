@@ -1,32 +1,48 @@
 import { useState } from 'react';
+import FormatDate from './FormatDate';
 
 const Form = ({todo, setTodo, todoList, setTodoList}) => {
 
   const handleChange = (event) => {
-    let newItem = {
-      id: todoList.length ? todoList[todoList.length - 1].id + 1 : 1,
-      name: event.target.value,
-      timestampCreated: new Date().getTime(),
-      timestampDue: new Date().getTime(),
-      complete: false
+    let newItem;
+    // If the current todo has no id it means we are adding a new todo
+    if (!todo.id) {
+      newItem = {
+        id: todoList.length ? todoList[todoList.length - 1].id + 1 : 1,
+        timestampCreated: new Date().getTime(),
+        complete: false
+      }
+    } else {
+      newItem = Object.assign({}, todo);
+    }
+    switch (event.target.id) {
+      case "taskname":
+        newItem.name = event.target.value;
+        break;
+      case "duedate":
+        newItem.timestampDue = new Date(event.target.value).getTime();
+        break;
+      default: break;
     }
     setTodo(newItem);
-    console.log(newItem);
   }
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    setTodoList([...todoList, todo]);
-    setTodo({name:""});
-    console.log(todoList);
+    if (todo.name && todo.name.trim().length) {
+      setTodoList([...todoList, todo]);
+      setTodo({name:""});
+    } else document.getElementById("taskname").focus(); // this is not React but it will do for now
   }
 
   return (
     <form onSubmit={handleSubmit}>
-    <input value={todo.name} onChange={handleChange} type="text" className="taskname" placeholder="My new task..." />
+    <input id="taskname" value={todo.name} onChange={handleChange} type="text" placeholder="My new task..." />
     <div className="duedate">
       <label htmlFor="dateDue">Deadline (optional)</label>
-      <input type="date" name="dateDue" min="2022-05-17" />
+      <input id="duedate" type="date" 
+        value={todo.timestampDue ? FormatDate(todo.timestampDue) : ""} 
+        name="dateDue" onChange={handleChange} />
     </div>
     <button type="submit">Add Task</button>
   </form>

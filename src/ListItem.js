@@ -3,13 +3,23 @@ import FormatDate from "./FormatDate";
 export default function ListItem({item, completeItem, removeItem}) {
 
   let itemClass = "";
-  //if (isOverdue(item)) itemClass += "overdue ";
+  const isOverdue = (item) => {
+    const today = FormatDate(new Date()); // this way we just check the days, not milliseconds
+    const dateToCheck = FormatDate(item.timestampDue);
+    return dateToCheck < today;
+  }
+
+  if (isOverdue(item)) itemClass += "overdue ";
   if (item.complete) itemClass += "completed ";
 
   return (
     <li key={item.id} className={itemClass}>
       <span className="content">{item.name}</span>
-      <span className="datedue">By: {FormatDate(new Date(item.timestampDue))}</span>
+      {item.timestampDue && (
+        <span className="datedue">
+          By: {FormatDate(new Date(item.timestampDue))}
+        </span>
+      )}
       {!item.complete && (
         <span className="complete" title="Complete" onClick={completeItem}>✓</span>
       )}
